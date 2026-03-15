@@ -1,7 +1,3 @@
-Perfecto. Este es **solo el README para el repo `mercadoplus-api`**.
-
----
-
 ```markdown
 # MercadoPlus API
 
@@ -165,5 +161,4 @@ This repository is presented as a **legacy portfolio project**, preserved as an 
 
 Educational/demo project.
 
-```
 ```
