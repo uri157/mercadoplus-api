@@ -114,7 +114,7 @@ Swagger UI is enabled for exploring and testing the API.
 dotnet restore
 dotnet build
 dotnet run
-
+```
 
 Swagger should be available at:
 
