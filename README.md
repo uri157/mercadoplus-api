@@ -1,4 +1,3 @@
-```markdown
 # MercadoPlus API
 
 Backend API for **MercadoPlus**, a MercadoLibre-style e-commerce platform.
@@ -46,7 +45,6 @@ The API exposes a **RESTful interface** documented with Swagger and secured with
 
 The project follows a layered structure separating HTTP concerns from business logic.
 
-```
 
 Controllers   → HTTP endpoints
 Services      → business logic
@@ -55,7 +53,7 @@ Models        → domain entities
 DTOs          → request / response objects
 Context       → EF Core database context
 
-```
+
 
 This structure keeps controllers thin while business logic is handled in services through dependency injection.
 
@@ -95,11 +93,11 @@ This structure keeps controllers thin while business logic is handled in service
 
 Swagger UI is enabled for exploring and testing the API.
 
-```
+
 
 /swagger
 
-````
+
 
 ---
 
@@ -116,13 +114,13 @@ Swagger UI is enabled for exploring and testing the API.
 dotnet restore
 dotnet build
 dotnet run
-````
+
 
 Swagger should be available at:
 
-```
+
 /swagger
-```
+
 
 ---
 
@@ -161,4 +159,4 @@ This repository is presented as a **legacy portfolio project**, preserved as an 
 
 Educational/demo project.
 
-```
+
