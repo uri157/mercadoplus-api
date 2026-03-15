@@ -1,110 +1,169 @@
-# MercadoPlus API (ASP.NET Core 8)
-
-> My first real backend/API. Here I learned **REST**, applied **MVC principles** (controller + model; no views), used **Dependency Injection**, implemented **JWT auth**, integrated **Mailgun** for account emails, and deployed an API consumed by multiple clients.
-> I owned the **API end-to-end**. A static web frontend and a FlutterFlow mobile app were built by teammates and successfully consumed this API.
-
--
-## 🛍️ Overview
-
-A **MercadoLibre-style** e-commerce API that provides:
-
-* Public **catalog** with **search & category filters**
-* **User accounts** (register, email confirmation, login with JWT)
-* **Shopping cart** (add/remove/clear, user-scoped)
-* **Transactions** (purchase flow + notifications)
-* **Admin** operations for catalog entities
-* **Email notifications** via **Mailgun**
-
-Built as a clean Web API with layered responsibilities (**Controllers → Services → Interfaces → Context/Models/DTOs**).
+Perfecto. Este es **solo el README para el repo `mercadoplus-api`**.
 
 ---
 
-## 🧱 Tech Stack
+```markdown
+# MercadoPlus API
 
-* **Language:** C# 12
-* **Target:** .NET 8.0 (LTS)
-* **Framework:** ASP.NET Core Web API
-* **Data:** Entity Framework Core + **SQL Server** provider
-* **Auth:** ASP.NET Core **Identity** + **JWT Bearer**
-* **Docs:** **Swagger/OpenAPI** (enabled in all environments)
-* **Email:** Mailgun (HTTP API)
+Backend API for **MercadoPlus**, a MercadoLibre-style e-commerce platform.
 
-> Swagger UI is always on at `/swagger` 
+This project was my **first full backend system** built with ASP.NET Core.  
+I designed and implemented the API end-to-end, including authentication, catalog management, shopping cart logic, transactions, and email notifications.
+
+The API was successfully consumed by both a **web frontend** and a **mobile client** developed by teammates.
 
 ---
 
+## Overview
 
-## ⚙️ Runtime & Pipeline
+MercadoPlus provides the backend services for a collaborative academic e-commerce project inspired by Mercado Libre.
 
-**Program.cs** configures:
+Main capabilities include:
 
-* **Controllers**, **Swagger** (`UseSwagger`, `UseSwaggerUI` always on), **HTTPS redirection**
-* **CORS** policy `AllowHttpServerOrigin` (origins: `https://34.229.139.218/`, `https://mercadoplus.xyz`, credentials allowed)
-* **EF Core** with **SQL Server** using `ConnectionStrings:cnMercadoLibre`
-* **Identity** (`User`, `IdentityRole<int>`, token providers)
-* **JWT Bearer** (validates **Issuer/Audience/Key**; expects `Jwt:*` config)
-* **DI** for app services (catalog, cart, transactions, mail, etc.)
-* **Auth** + **Authorization**
-* **MapControllers**
+- Product catalog with search and filtering
+- User registration and authentication
+- Shopping cart management
+- Purchase / transaction flow
+- Reviews and notifications
+- Admin catalog management
+- Email notifications
 
+The API exposes a **RESTful interface** documented with Swagger and secured with JWT authentication.
 
-## 🚀 Quickstart (Dev)
+---
+
+## Tech Stack
+
+- **C#**
+- **.NET 8**
+- **ASP.NET Core Web API**
+- **Entity Framework Core**
+- **SQL Server**
+- **ASP.NET Core Identity**
+- **JWT Authentication**
+- **Swagger / OpenAPI**
+- **Mailgun API**
+
+---
+
+## Architecture
+
+The project follows a layered structure separating HTTP concerns from business logic.
+
+```
+
+Controllers   → HTTP endpoints
+Services      → business logic
+Interfaces    → service contracts
+Models        → domain entities
+DTOs          → request / response objects
+Context       → EF Core database context
+
+```
+
+This structure keeps controllers thin while business logic is handled in services through dependency injection.
+
+---
+
+## Core Features
+
+### Authentication & Accounts
+
+- User registration
+- Email confirmation
+- JWT-based login
+- Role-based authorization
+
+### Catalog
+
+- Product publications
+- Categories
+- Product states
+- Photo management
+
+### Shopping Flow
+
+- Shopping cart
+- Transactions
+- Payment methods
+- Purchase notifications
+
+### Social Features
+
+- Product reviews
+- Publication visits tracking
+
+---
+
+## API Documentation
+
+Swagger UI is enabled for exploring and testing the API.
+
+```
+
+/swagger
+
+````
+
+---
+
+## Running Locally
+
+### Prerequisites
+
+- .NET 8 SDK
+- SQL Server instance
+
+### Run the API
 
 ```bash
-# .NET 8 SDK
-dotnet --info
-
-# Restore, build, run
 dotnet restore
 dotnet build
-dotnet run --project api-biblioteca.csproj
+dotnet run
+````
+
+Swagger should be available at:
+
 ```
-
-* Swagger UI: `https://localhost:7124/swagger` (or the HTTP port)
-* `api-biblioteca.http` is the default template (weatherforecast). Use **Swagger** or your own requests.
-
----
-
-## 🗄️ Database & Migrations
-
-The repo does **not** include migrations. If you need an empty schema:
-
-```bash
-dotnet tool update -g dotnet-ef
-dotnet ef migrations add InitialCreate
-dotnet ef database update
+/swagger
 ```
 
 ---
 
-## 🔐 Authentication & Roles
+## What I Learned
 
-* ASP.NET Core **Identity** with `User` and `IdentityRole<int>`
-* **JWT** issued at login (includes role claims)
-* Public endpoints for register, confirm email, login, catalog queries
-* Protected endpoints for cart, transactions, and admin operations (via `[Authorize]`, some “admin”-only)
+This project helped me understand and apply:
+
+* REST API design
+* Dependency Injection
+* layered backend architecture
+* authentication and authorization with Identity + JWT
+* Entity Framework data modeling
+* third-party service integration (Mailgun)
+* API documentation with Swagger
+
+It was my **first real backend system consumed by external clients**.
 
 ---
 
-## ✉️ Emails & Notifications
+## Project Context
 
-* **Registration** sends a confirmation email via `MailService` (Mailgun).
-* **Notifications** endpoints store notifications and attempt to send emails.
+MercadoPlus was developed as a **team academic project**.
 
+My responsibility was the **backend API**, which I implemented end-to-end.
+The web frontend and mobile client were built by teammates and integrated against this API.
 
 ---
 
-## 🧭 What I Learned
+## Repository Status
 
-* **REST** resource design for a transactional domain (catalog, carts, orders, notifications)
-* **MVC without views**: slim controllers, business logic in **Services**, strict **DI** contracts
-* **EF Core** for modeling, relationships, and migrations
-* **Identity + JWT** for secure access and role-based authorization
-* **Third-party integration** (Mailgun) and operational concerns (CORS, Swagger, HTTPS, environments)
+This repository is presented as a **legacy portfolio project**, preserved as an example of my early backend work and architectural learning process.
 
+---
 
+## License
 
-## 🏷️ License / Credits
+Educational/demo project.
 
-Academic/demo project. Diagrams/images are for documentation only.
-Frontend work credited to teammates; **API** design & implementation by me.
+```
+```
